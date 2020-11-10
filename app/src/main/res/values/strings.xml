@@ -4,4 +4,6 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="change_proj_name">Change project name</string>
+    <string name="not_empty">Should be not empty</string>
+    <string name="save">Save</string>
 </resources>

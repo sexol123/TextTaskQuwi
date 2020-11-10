@@ -1,6 +1,5 @@
 package com.example.testtask.ui.content
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testtask.R
 import com.example.testtask.data.response.Project
 import com.example.testtask.ui.base.BaseFragment
-import com.example.testtask.ui.login.LoginViewModel
 import com.example.testtask.ui.login.ProgectListAdapter
 import kotlinx.android.synthetic.main.layout_content_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -60,14 +58,14 @@ class ContentFragment : BaseFragment<ContentViewModel>() {
         AlertDialog.Builder(requireActivity())
             .setMessage(R.string.change_proj_name)
             .setView(dialogInput)
-            .setPositiveButton("Save") { dialog, _ ->
+            .setPositiveButton(R.string.save) { dialog, _ ->
                 val txt = dialogInput.text.toString()
                 if (txt.isNotBlank()) {
                     mViewModel.updateName(project.id, txt, doOnError = { Unit }, doOnSuccess = {
                         dialog.dismiss()
                     })
-                }else{
-                    Toast.makeText(context, "Should be not empty", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, R.string.not_empty, Toast.LENGTH_SHORT).show()
                 }
             }
             .setNegativeButton("Cancel") { _, _ -> }
