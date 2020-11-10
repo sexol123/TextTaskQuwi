@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        tools:layout="@layout/layout_content_fragment"
+        android:id="@+id/contentFragment"
+        android:name="com.example.testtask.ui.content.ContentFragment"
+        android:label="ContentFragment" >
+        <argument
+            android:name="appInit"
+            app:argType="com.example.testtask.data.response.AppInit" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/layout_login_fragment"
+        android:id="@+id/loginFragment"
+        android:name="com.example.testtask.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_contentFragment"
+            app:destination="@id/contentFragment" />
+    </fragment>
+</navigation>
