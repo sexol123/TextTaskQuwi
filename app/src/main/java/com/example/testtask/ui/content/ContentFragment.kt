@@ -68,7 +68,7 @@ class ContentFragment : BaseFragment<ContentViewModel>() {
                     Toast.makeText(context, R.string.not_empty, Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancel") { _, _ -> }
+            .setNegativeButton(R.string.cancel) { _, _ -> }
             .create()
             .show()
 
