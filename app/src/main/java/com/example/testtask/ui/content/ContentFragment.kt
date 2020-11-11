@@ -32,16 +32,15 @@ class ContentFragment : BaseFragment<ContentViewModel>() {
             val lm = LinearLayoutManager(context)
             layoutManager = lm
             addItemDecoration(DividerItemDecoration(context, lm.orientation).apply {
-                ResourcesCompat.getDrawable(resources, R.drawable.decorator, resources.newTheme())?.let {
-                    setDrawable(it)
-                }
+                ResourcesCompat.getDrawable(resources, R.drawable.decorator, resources.newTheme())
+                    ?.let(::setDrawable)
             })
             adapter = ProgectListAdapter(arrayListOf()) {
                 showEditNameDialog(it)
             }
 
             mViewModel.projects.observe(viewLifecycleOwner) {
-                (adapter as? ProgectListAdapter)?.update(it)
+                (adapter as ProgectListAdapter).update(it)
             }
         }
     }

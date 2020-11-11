@@ -2,7 +2,6 @@ package com.example.testtask.ui.content
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.testtask.data.QuwiApiRepository
 import com.example.testtask.data.response.Project
 import com.example.testtask.ui.base.BaseViewModel
@@ -22,22 +21,20 @@ class ContentViewModel(
     val projects: LiveData<List<Project>> = _projects
 
     private fun updateProjectList(){
-        loadProjects {
-            _projects.postValue(it ?: listOf())
-        }
+        loadProjects(_projects::postValue)
     }
 
     fun updateName(id: Long, newName: String, doOnSuccess: () -> Unit, doOnError: () -> Unit) {
         runWithLoadingCoroutine({
             quwiApiRepository.update(id, newName)
-        }, onSuccess = { result ->
+        }, onSuccess = {
             updateProjectList()
 
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 doOnSuccess()
             }
         }, onError = {
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 doOnError()
             }
         })

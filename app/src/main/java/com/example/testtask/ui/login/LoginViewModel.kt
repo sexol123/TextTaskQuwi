@@ -1,11 +1,11 @@
 package com.example.testtask.ui.login
 
-import androidx.lifecycle.*
+import com.example.testtask.R
 import com.example.testtask.data.QuwiApiRepository
 import com.example.testtask.data.localstorage.LocalStorageRepository
 import com.example.testtask.data.response.AppInit
-import com.example.testtask.data.response.LoginResponse
 import com.example.testtask.ui.base.BaseViewModel
+import com.example.testtask.util.getString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -14,17 +14,9 @@ class LoginViewModel(
     private val localStorageRepository: LocalStorageRepository
 ): BaseViewModel() {
 
-    private val _isAuthLiveData = object: MutableLiveData<Boolean>(){
-        override fun onActive() {
-            super.onActive()
-            postValue(localStorageRepository.getBearerToken().value != null)
-        }
-    }
-    val isAuthLiveData: LiveData<Boolean> = _isAuthLiveData
-
     fun login(email: String, pass: String, onLoggedIn: (AppInit) -> Unit){
         if (email.isBlank() or pass.isBlank()){
-            showError("Fields can't be empty")
+            showError(getString(R.string.cntbe_empty))
             return
         }
 
@@ -32,8 +24,8 @@ class LoginViewModel(
             quwiApiRepository.login(email, pass)
         }, onSuccess = {
             localStorageRepository.saveBearerToken(it.token)
-            withContext(Dispatchers.Main){
-                showMessage("Hello ${it.app_init.user.name}")
+            withContext(Dispatchers.Main) {
+                showMessage(msg = "Hello ${it.app_init.user.name}")
                 onLoggedIn(it.app_init)
             }
         })

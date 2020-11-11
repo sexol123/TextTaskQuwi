@@ -7,4 +7,6 @@
     <string name="not_empty">Should be not empty</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="cntbe_empty">Fields can\'t be empty</string>
+    <string name="hello">Hello %s</string>
 </resources>
